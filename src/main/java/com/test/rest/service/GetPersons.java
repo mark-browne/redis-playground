@@ -29,11 +29,11 @@ public class GetPersons {
        ResponseEntity<List<Person>> persons = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {});
        System.out.println(persons.getBody());
        try {
-           Long savedPerson =  redisTemplate.opsForList().leftPush("test1",persons.getBody().get(3));
+           Long savedPerson =  redisTemplate.opsForList().leftPush("test1",persons.getBody().get(2));
            System.out.println("SAVED PERSON " +  savedPerson);
            System.out.println("SIZE "+ redisTemplate.opsForList().size("test1"));
-           System.out.println("ITEM "+ redisTemplate.opsForList().index("test1",870));
-           Person savedPersonPostgres =  personRepository.save(persons.getBody().get(3));
+           System.out.println("ITEM "+ redisTemplate.opsForList().index("test1",2));
+           Person savedPersonPostgres =  personRepository.save(persons.getBody().get(2));
        }
        catch (Exception dae){
            System.out.println(dae.getClass());
